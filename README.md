@@ -8,6 +8,14 @@ for a real backend (Supabase/Postgres) in Phase 1 **without a UI rewrite**.
 > **Pitch line:** _See your whole party → measure who's real → mobilise them instantly →
 > win nominations and elections with data._
 
+## 🌐 Live demo
+
+**Production:** **https://nation-inside.vercel.app**
+
+Hosted free on **Vercel** (global CDN, opens fast on mobile). The best pitch view is the
+full-screen **War Room** at [`/warroom`](https://nation-inside.vercel.app/warroom).
+All figures are mock data and consistent across every screen.
+
 ## Features (all live in this demo)
 
 | Route | Feature | What it shows |
@@ -54,6 +62,39 @@ Free Supabase  →  Supabase Pro ($25)  →  Self-hosted Postgres (Hetzner VPS)
 
 Postgres throughout (relational, self-hostable) — no vendor lock-in, predictable cost.
 Mobile member app (Flutter) is planned for Phase 1; this demo is web-first for pitching.
+
+## Deployment
+
+Hosted on **Vercel** (free tier).
+
+- **Production URL:** https://nation-inside.vercel.app
+- **Vercel project:** `doctorschamberhub-6688s-projects/nation-inside`
+- **Production branch (intended):** `webdemo`
+
+### Manual deploy (works today)
+
+```bash
+npx vercel deploy --prod --yes
+```
+
+### Enable push-to-deploy from `webdemo` (one-time setup)
+
+GitHub auto-deploy needs a one-time browser authorization that can't be done from
+the CLI. Once completed, every push to `webdemo` deploys automatically.
+
+1. **Authorize GitHub on Vercel:** install/grant the Vercel GitHub App for the
+   `NationInside` repo → https://github.com/apps/vercel
+2. **Connect the repo:** Vercel dashboard → project `nation-inside` →
+   **Settings → Git → Connect Git Repository** → select `amerganim/NationInside`.
+3. **Set the production branch:** **Settings → Git → Production Branch** → `webdemo` → Save.
+
+After that:
+
+```bash
+git checkout webdemo
+git add -A && git commit -m "…"
+git push            # Vercel builds & deploys automatically
+```
 
 ---
 _Demo build · all figures are mock data._
