@@ -34,23 +34,28 @@ Realtime). One-time, ~10 minutes. Everything here is on the **free tier**.
 **Storage → New bucket** → name `photos` → **Public** → Create.
 (Member photos, task proof, geo-tagged uploads. 1 GB free.)
 
-## 6. Make yourself the first admin
-After you register your own account in the app (step 7), run this in **SQL Editor**
-to promote it to super admin (replace the email):
-
-```sql
-update profiles set role = 'super_admin', status = 'active', org_node_id = 'national'
-where id = (select id from auth.users where email = 'YOUR-EMAIL@example.com');
-```
-
-## 7. Run the app
+## 6. Run the app
 ```bash
 npm install
 npm run dev   # http://localhost:3000
 ```
 
-Register an account, promote it (step 6), then approve other members from the admin
-area. Done — you have a real, multi-user pilot.
+## 7. Register yourself, then become the first admin
+The first admin has no one above them to approve it, so you approve yourself **once**
+by hand:
+
+1. Open **http://localhost:3000/register** and create your account. You'll land on the
+   dashboard as a *pending* member — that's expected.
+2. In **Supabase → SQL Editor**, run this (replace the email with yours):
+
+   ```sql
+   update profiles set role = 'super_admin', status = 'active', org_node_id = 'national'
+   where id = (select id from auth.users where email = 'YOUR-EMAIL@example.com');
+   ```
+
+3. Refresh the app — you're now active and an **Admin** tab appears.
+4. Register a second test account (incognito window), then **approve it** from the
+   Admin tab. Done — you have a real, multi-user pilot.
 
 ---
 

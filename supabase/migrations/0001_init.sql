@@ -181,8 +181,9 @@ create trigger score_events_recompute
 create or replace function prevent_profile_escalation()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
-  if auth.role() = 'service_role' then
-    return new;  -- server actions (admin) may change anything
+  -- Privileged DB roles (service-role API requests, SQL editor, admin) may change anything.
+  if current_user in ('service_role', 'postgres', 'supabase_admin') then
+    return new;
   end if;
   if new.role <> old.role
      or new.status <> old.status

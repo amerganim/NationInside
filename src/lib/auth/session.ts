@@ -36,3 +36,17 @@ export async function getSession(): Promise<SessionData> {
 export function isAdmin(profile: Profile | null): boolean {
   return profile?.role === "admin" || profile?.role === "super_admin";
 }
+
+/** Throws unless a user is signed in. Returns the session. */
+export async function requireUser(): Promise<SessionData> {
+  const session = await getSession();
+  if (!session.userId) throw new Error("Not signed in");
+  return session;
+}
+
+/** Throws unless the signed-in user is an admin. Returns the session. */
+export async function requireAdmin(): Promise<SessionData> {
+  const session = await getSession();
+  if (!isAdmin(session.profile)) throw new Error("Not authorised");
+  return session;
+}
