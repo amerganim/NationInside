@@ -107,6 +107,16 @@ export interface MobilizationResponse {
   responded_at: string;
 }
 
+export interface Notice {
+  id: string;
+  title: string;
+  body: string | null;
+  pinned: boolean;
+  org_node_id: string | null;
+  created_by: string | null;
+  created_at: string;
+}
+
 export interface ScoreEvent {
   id: string;
   member_id: string;

@@ -12,6 +12,7 @@ export default function MemberIdCard({
   orgName,
   status,
   joinedAt,
+  photoUrl,
 }: {
   id: string;
   name: string;
@@ -20,6 +21,7 @@ export default function MemberIdCard({
   orgName: string;
   status: string;
   joinedAt: string;
+  photoUrl?: string | null;
 }) {
   const initials = name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase() || "M";
   const verified = status === "active";
@@ -43,7 +45,7 @@ export default function MemberIdCard({
 
       <div className="p-5">
         <div className="flex items-center gap-4">
-          <Avatar initials={initials} hue={200} size={64} />
+          <Avatar initials={initials} hue={200} size={64} src={photoUrl} />
           <div className="min-w-0">
             <div className="font-bold text-lg leading-tight truncate">{name}</div>
             {nameBn && <div className="text-muted text-sm truncate">{nameBn}</div>}

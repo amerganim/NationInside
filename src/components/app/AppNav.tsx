@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Target, CalendarDays, Megaphone, ShieldCheck, BarChart3 } from "lucide-react";
+import { Home, Target, CalendarDays, Megaphone, ShieldCheck, BarChart3, Bell } from "lucide-react";
 
 const BASE = [
   { href: "/app", label: "Home", icon: Home },
+  { href: "/app/notices", label: "Notices", icon: Bell },
   { href: "/app/tasks", label: "Tasks", icon: Target },
   { href: "/app/events", label: "Events", icon: CalendarDays },
   { href: "/app/mobilize", label: "Mobilise", icon: Megaphone },

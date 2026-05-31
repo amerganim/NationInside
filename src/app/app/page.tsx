@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Clock, Target, CalendarDays, Megaphone, TrendingUp } from "lucide-react";
+import { Clock, Target, CalendarDays, Megaphone, TrendingUp, Pencil } from "lucide-react";
 import { getSession } from "@/lib/auth/session";
 import { Panel, ScoreBar, scoreColor } from "@/components/ui";
 import MemberIdCard from "@/components/app/MemberIdCard";
@@ -32,7 +32,7 @@ export default async function MemberHome() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="flex justify-center lg:justify-start">
+        <div className="flex flex-col items-center lg:items-start gap-3">
           <MemberIdCard
             id={userId ?? ""}
             name={name}
@@ -41,7 +41,11 @@ export default async function MemberHome() {
             orgName={orgNode?.name ?? "Unassigned"}
             status={profile?.status ?? "pending"}
             joinedAt={profile?.joined_at ?? new Date().toISOString()}
+            photoUrl={profile?.photo_url}
           />
+          <Link href="/app/profile" className="inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:underline">
+            <Pencil size={14} /> Edit profile &amp; photo
+          </Link>
         </div>
 
         <div className="lg:col-span-2 space-y-4">

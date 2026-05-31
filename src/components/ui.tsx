@@ -101,11 +101,24 @@ export function Avatar({
   initials,
   hue,
   size = 40,
+  src,
 }: {
   initials: string;
   hue: number;
   size?: number;
+  src?: string | null;
 }) {
+  if (src) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt={initials}
+        className="rounded-full object-cover shrink-0"
+        style={{ width: size, height: size }}
+      />
+    );
+  }
   return (
     <div
       className="flex items-center justify-center rounded-full font-semibold text-white shrink-0"

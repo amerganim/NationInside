@@ -29,7 +29,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
           <div className="flex items-center gap-3 shrink-0">
             <div className="hidden md:flex items-center gap-2">
-              <Avatar initials={initials} hue={200} size={32} />
+              <Avatar initials={initials} hue={200} size={32} src={profile?.photo_url} />
               <div className="leading-tight">
                 <div className="text-sm font-medium">{name}</div>
                 <div className="text-[11px] text-muted capitalize">{profile?.status ?? ""}</div>
