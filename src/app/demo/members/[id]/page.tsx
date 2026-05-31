@@ -23,7 +23,7 @@ export default async function MemberPage({ params }: { params: Promise<{ id: str
 
   return (
     <div className="space-y-6">
-      <Link href="/members" className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground">
+      <Link href="/demo/members" className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground">
         <ArrowLeft size={16} /> Back to members
       </Link>
 

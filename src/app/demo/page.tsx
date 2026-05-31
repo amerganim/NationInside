@@ -58,7 +58,7 @@ export default function DashboardPage() {
             </p>
           </div>
           <Link
-            href="/mobilize"
+            href="/demo/mobilize"
             className="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shrink-0"
             style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}
           >

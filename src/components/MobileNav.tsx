@@ -41,7 +41,7 @@ export default function MobileNav() {
 
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
           {NAV.map((item) => {
-            const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+            const active = item.href === "/demo" ? pathname === "/demo" : pathname.startsWith(item.href);
             const Icon = item.icon;
             return (
               <Link

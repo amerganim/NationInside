@@ -101,7 +101,7 @@ export default function MembersBrowser({ members }: { members: Member[] }) {
           <>
             <DigitalIdCard member={selected} />
             <Link
-              href={`/members/${selected.id}`}
+              href={`/demo/members/${selected.id}`}
               className="inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:underline"
             >
               Open full ID page <ExternalLink size={14} />

@@ -16,11 +16,11 @@ export interface NavItem {
 }
 
 export const DEMO_NAV: NavItem[] = [
-  { href: "/", label: "National Dashboard", icon: LayoutDashboard },
-  { href: "/hierarchy", label: "Organisation Tree", icon: Network },
-  { href: "/members", label: "Members & Digital ID", icon: IdCard },
-  { href: "/mobilize", label: "One-Tap Mobilisation", icon: Megaphone },
-  { href: "/activity", label: "Activity Score", icon: Trophy },
-  { href: "/nominations", label: "Nomination Intelligence", icon: Vote },
-  { href: "/assistant", label: "AI Assistant", icon: Sparkles },
+  { href: "/demo", label: "National Dashboard", icon: LayoutDashboard },
+  { href: "/demo/hierarchy", label: "Organisation Tree", icon: Network },
+  { href: "/demo/members", label: "Members & Digital ID", icon: IdCard },
+  { href: "/demo/mobilize", label: "One-Tap Mobilisation", icon: Megaphone },
+  { href: "/demo/activity", label: "Activity Score", icon: Trophy },
+  { href: "/demo/nominations", label: "Nomination Intelligence", icon: Vote },
+  { href: "/demo/assistant", label: "AI Assistant", icon: Sparkles },
 ];

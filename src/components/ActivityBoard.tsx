@@ -40,7 +40,7 @@ export default function ActivityBoard({
           {members.map((m, i) => (
             <Link
               key={m.id}
-              href={`/members/${m.id}`}
+              href={`/demo/members/${m.id}`}
               className="flex items-center gap-4 p-3 rounded-xl border border-border bg-[#0d1626] hover:bg-[#101c33] transition-colors"
             >
               <div className="w-8 text-center font-bold shrink-0" style={{ color: i < 3 ? MEDAL[i] : "var(--muted)" }}>
