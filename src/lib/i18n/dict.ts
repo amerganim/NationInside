@@ -191,6 +191,31 @@ Object.assign(DICT, {
   "verify.noPending": { en: "No members awaiting approval. 🎉", bn: "অনুমোদনের অপেক্ষায় কোনো সদস্য নেই। 🎉" },
   "verify.noActive": { en: "No active members yet.", bn: "এখনও কোনো সক্রিয় সদস্য নেই।" },
   "verify.pendingBadge": { en: "pending", bn: "অপেক্ষমাণ" },
+
+  // Landing
+  "landing.viewDemo": { en: "View demo", bn: "ডেমো দেখুন" },
+  "landing.login": { en: "Login", bn: "লগইন" },
+  "landing.register": { en: "Register", bn: "নিবন্ধন" },
+  "landing.badge": { en: "Secure · members verified by your admins", bn: "নিরাপদ · সদস্য আপনার অ্যাডমিন দ্বারা যাচাইকৃত" },
+  "landing.h1a": { en: "Your party,", bn: "আপনার দল," },
+  "landing.h1b": { en: "organised and mobilised.", bn: "সংগঠিত ও সক্রিয়।" },
+  "landing.subtitle": { en: "A digital operating system for political organisations — membership, events, missions, scoring and real-time mobilisation, all in one place.", bn: "রাজনৈতিক সংগঠনের জন্য একটি ডিজিটাল অপারেটিং সিস্টেম — সদস্যপদ, অনুষ্ঠান, মিশন, স্কোরিং এবং রিয়েল-টাইম সমাবেশ, সবকিছু এক জায়গায়।" },
+  "landing.becomeMember": { en: "Become a member", bn: "সদস্য হোন" },
+  "landing.memberLogin": { en: "Member login", bn: "সদস্য লগইন" },
+  "landing.exploreDemo": { en: "Or explore the interactive demo →", bn: "অথবা ইন্টারেক্টিভ ডেমো দেখুন →" },
+  "landing.footer": { en: "Nation Inside · Party Operating System · built for Bangladesh", bn: "Nation Inside · পার্টি অপারেটিং সিস্টেম · বাংলাদেশের জন্য নির্মিত" },
+  "feat.id.t": { en: "Digital Member ID", bn: "ডিজিটাল সদস্য আইডি" },
+  "feat.id.d": { en: "Every member carries a verifiable QR ID, approved by your committee admins.", bn: "প্রত্যেক সদস্যের যাচাইযোগ্য QR আইডি, কমিটি অ্যাডমিন অনুমোদিত।" },
+  "feat.events.t": { en: "Events & Attendance", bn: "অনুষ্ঠান ও উপস্থিতি" },
+  "feat.events.d": { en: "Create rallies and meetings; members check in with a QR scan.", bn: "সমাবেশ ও সভা তৈরি করুন; সদস্যরা QR স্ক্যানে চেক-ইন করেন।" },
+  "feat.missions.t": { en: "Missions & Scoring", bn: "মিশন ও স্কোরিং" },
+  "feat.missions.d": { en: "Assign tasks, collect geo-tagged proof, and reward real activity.", bn: "কাজ বরাদ্দ করুন, জিও-ট্যাগ প্রমাণ সংগ্রহ করুন এবং প্রকৃত কার্যকলাপ পুরস্কৃত করুন।" },
+  "feat.mobilize.t": { en: "Live Mobilisation", bn: "লাইভ সমাবেশ" },
+  "feat.mobilize.d": { en: "Issue a call-up; watch members respond in real time.", bn: "ডাক দিন; সদস্যদের রিয়েল-টাইম সাড়া দেখুন।" },
+  "feat.dashboard.t": { en: "Leader Dashboard", bn: "নেতৃত্ব ড্যাশবোর্ড" },
+  "feat.dashboard.d": { en: "Live intelligence on membership, activity and reach.", bn: "সদস্যপদ, কার্যকলাপ ও পরিধির লাইভ বুদ্ধিমত্তা।" },
+  "feat.tree.t": { en: "Organisation Tree", bn: "সংগঠন কাঠামো" },
+  "feat.tree.d": { en: "Your full structure — national down to ward — in one place.", bn: "জাতীয় থেকে ওয়ার্ড পর্যন্ত আপনার পূর্ণ কাঠামো এক জায়গায়।" },
 });
 
 export function t(key: string, locale: Locale): string {
