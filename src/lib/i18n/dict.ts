@@ -142,6 +142,55 @@ Object.assign(DICT, {
   "search.placeholder": { en: "Search members by district, status, role…", bn: "জেলা, স্ট্যাটাস, ভূমিকা দিয়ে সদস্য খুঁজুন…" },
   "admin.title": { en: "Admin · Member Verification", bn: "অ্যাডমিন · সদস্য যাচাই" },
   "admin.subtitle": { en: "Approve new members and manage the roster.", bn: "নতুন সদস্য অনুমোদন করুন এবং তালিকা পরিচালনা করুন।" },
+
+  // Shared form fields
+  "form.title": { en: "Title", bn: "শিরোনাম" },
+  "form.description": { en: "Description", bn: "বিবরণ" },
+  "form.committee": { en: "Committee", bn: "কমিটি" },
+  "form.national": { en: "National", bn: "জাতীয়" },
+  "form.category": { en: "Category", bn: "বিভাগ" },
+  "form.points": { en: "Points", bn: "পয়েন্ট" },
+  "form.dueDate": { en: "Due date", bn: "শেষ তারিখ" },
+  "form.dateTime": { en: "Date & time", bn: "তারিখ ও সময়" },
+  "form.expectedAttendance": { en: "Expected attendance", bn: "প্রত্যাশিত উপস্থিতি" },
+  "form.location": { en: "Location", bn: "অবস্থান" },
+  "form.message": { en: "Message", bn: "বার্তা" },
+  "form.audience": { en: "Audience", bn: "শ্রোতা" },
+  "form.nationalEveryone": { en: "National (everyone)", bn: "জাতীয় (সবাই)" },
+  "form.pinTop": { en: "Pin to top", bn: "উপরে পিন করুন" },
+  "form.chooseFile": { en: "Choose file (PDF, image, doc…)", bn: "ফাইল বাছুন (PDF, ছবি, ডক…)" },
+  "form.creating": { en: "Creating…", bn: "তৈরি হচ্ছে…" },
+
+  // Event form
+  "eventForm.heading": { en: "Create event", bn: "অনুষ্ঠান তৈরি করুন" },
+  // Task form
+  "taskForm.heading": { en: "Create task / mission", bn: "কাজ / মিশন তৈরি করুন" },
+  "taskForm.submit": { en: "Create task", bn: "কাজ তৈরি করুন" },
+  // Mobilise form
+  "mobForm.heading": { en: "Issue a mobilisation", bn: "সমাবেশের ডাক দিন" },
+  "mobForm.target": { en: "Target committee", bn: "লক্ষ্য কমিটি" },
+  "mobForm.submit": { en: "Issue call-up", bn: "ডাক দিন" },
+  "mobForm.sending": { en: "Sending…", bn: "পাঠানো হচ্ছে…" },
+  // Notice form
+  "noticeForm.heading": { en: "Post a notice", bn: "নোটিশ পোস্ট করুন" },
+  "noticeForm.submit": { en: "Post notice", bn: "নোটিশ পোস্ট করুন" },
+  "noticeForm.posting": { en: "Posting…", bn: "পোস্ট হচ্ছে…" },
+  // Document form
+  "docForm.heading": { en: "Upload a document", bn: "নথি আপলোড করুন" },
+  "docForm.publish": { en: "Publish", bn: "প্রকাশ করুন" },
+  "docForm.uploading": { en: "Uploading…", bn: "আপলোড হচ্ছে…" },
+
+  // Verify Members (admin)
+  "verify.pending": { en: "Pending Verification", bn: "যাচাইয়ের অপেক্ষায়" },
+  "verify.pendingSub": { en: "Assign a committee and approve", bn: "কমিটি নির্ধারণ করে অনুমোদন করুন" },
+  "verify.active": { en: "Active Members", bn: "সক্রিয় সদস্য" },
+  "verify.activeSub": { en: "Top of the roster by activity score", bn: "কার্যকলাপ স্কোর অনুযায়ী শীর্ষ তালিকা" },
+  "verify.approve": { en: "Approve", bn: "অনুমোদন" },
+  "verify.selectDistrict": { en: "Select district…", bn: "জেলা নির্বাচন করুন…" },
+  "verify.designation": { en: "Designation", bn: "পদবি" },
+  "verify.noPending": { en: "No members awaiting approval. 🎉", bn: "অনুমোদনের অপেক্ষায় কোনো সদস্য নেই। 🎉" },
+  "verify.noActive": { en: "No active members yet.", bn: "এখনও কোনো সক্রিয় সদস্য নেই।" },
+  "verify.pendingBadge": { en: "pending", bn: "অপেক্ষমাণ" },
 });
 
 export function t(key: string, locale: Locale): string {

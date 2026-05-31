@@ -33,11 +33,11 @@ export default async function AdminPage() {
       </div>
 
       <Panel
-        title={`Pending Verification (${pendingList.length})`}
-        subtitle="Assign a committee and approve"
+        title={`${t("verify.pending")} (${pendingList.length})`}
+        subtitle={t("verify.pendingSub")}
       >
         {pendingList.length === 0 ? (
-          <p className="text-sm text-muted py-6 text-center">No members awaiting approval. 🎉</p>
+          <p className="text-sm text-muted py-6 text-center">{t("verify.noPending")}</p>
         ) : (
           <ul className="space-y-3">
             {pendingList.map((m) => (
@@ -48,25 +48,25 @@ export default async function AdminPage() {
                     <div className="font-medium">{m.full_name || "(no name)"}</div>
                     <div className="text-xs text-muted">{m.phone || "no phone"} · joined {m.joined_at.slice(0, 10)}</div>
                   </div>
-                  <Badge color="var(--warn)"><Clock size={11} /> pending</Badge>
+                  <Badge color="var(--warn)"><Clock size={11} /> {t("verify.pendingBadge")}</Badge>
                 </div>
                 <form action={approveMember} className="flex flex-wrap items-end gap-2">
                   <input type="hidden" name="member_id" value={m.id} />
                   <label className="text-xs text-muted">
-                    Committee
+                    {t("form.committee")}
                     <select name="org_node_id" required className="mt-1 block w-48 px-2 py-2 rounded-lg bg-[#0a1320] border border-border text-sm text-foreground">
-                      <option value="">Select district…</option>
+                      <option value="">{t("verify.selectDistrict")}</option>
                       {districtList.map((d) => (
                         <option key={d.id} value={d.id}>{d.name}</option>
                       ))}
                     </select>
                   </label>
                   <label className="text-xs text-muted">
-                    Designation
+                    {t("verify.designation")}
                     <input name="designation" defaultValue="Ward Organiser" className="mt-1 block w-44 px-2 py-2 rounded-lg bg-[#0a1320] border border-border text-sm" />
                   </label>
                   <button className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white" style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>
-                    <UserCheck size={15} /> Approve
+                    <UserCheck size={15} /> {t("verify.approve")}
                   </button>
                 </form>
               </li>
@@ -75,9 +75,9 @@ export default async function AdminPage() {
         )}
       </Panel>
 
-      <Panel title={`Active Members (${activeList.length})`} subtitle="Top of the roster by activity score">
+      <Panel title={`${t("verify.active")} (${activeList.length})`} subtitle={t("verify.activeSub")}>
         {activeList.length === 0 ? (
-          <p className="text-sm text-muted py-6 text-center">No active members yet.</p>
+          <p className="text-sm text-muted py-6 text-center">{t("verify.noActive")}</p>
         ) : (
           <ul className="divide-y divide-border">
             {activeList.map((m) => (
