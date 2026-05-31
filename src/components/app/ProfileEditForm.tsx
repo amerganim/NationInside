@@ -6,6 +6,7 @@ import { Camera, Loader2, Check } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { updateProfile } from "@/lib/profile/actions";
 import { Avatar } from "@/components/ui";
+import { useT } from "@/lib/i18n/client";
 
 export default function ProfileEditForm({
   userId,
@@ -24,6 +25,7 @@ export default function ProfileEditForm({
   const [saved, setSaved] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const t = useT();
 
   function onPick(f: File | null) {
     setFile(f);
@@ -72,12 +74,12 @@ export default function ProfileEditForm({
             <input type="file" accept="image/*" className="hidden" onChange={(e) => onPick(e.target.files?.[0] ?? null)} />
           </label>
         </div>
-        <div className="text-sm text-muted">Tap the camera to set your profile photo.<br />It appears on your Digital ID.</div>
+        <div className="text-sm text-muted">{t("profile.photoHint")}</div>
       </div>
 
-      <Field label="Full name"><input value={fullName} onChange={(e) => setFullName(e.target.value)} className="inp" /></Field>
-      <Field label="Name in Bangla"><input value={nameBn} onChange={(e) => setNameBn(e.target.value)} placeholder="আপনার নাম" className="inp" /></Field>
-      <Field label="Phone"><input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+8801…" className="inp" /></Field>
+      <Field label={t("profile.fullName")}><input value={fullName} onChange={(e) => setFullName(e.target.value)} className="inp" /></Field>
+      <Field label={t("profile.nameBn")}><input value={nameBn} onChange={(e) => setNameBn(e.target.value)} placeholder="আপনার নাম" className="inp" /></Field>
+      <Field label={t("profile.phone")}><input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+8801…" className="inp" /></Field>
 
       {err && <p className="text-sm text-[var(--danger)]">{err}</p>}
 
@@ -85,7 +87,7 @@ export default function ProfileEditForm({
         className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-semibold text-white disabled:opacity-60"
         style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>
         {(busy || pending) ? <Loader2 size={16} className="animate-spin" /> : saved ? <Check size={16} /> : null}
-        {saved ? "Saved" : "Save changes"}
+        {saved ? t("profile.saved") : t("profile.save")}
       </button>
 
       <style>{`.inp{width:100%;padding:.6rem .75rem;border-radius:.7rem;background:#0d1626;border:1px solid var(--border);font-size:.9rem;color:var(--foreground);outline:none}.inp:focus{border-color:var(--accent)}`}</style>

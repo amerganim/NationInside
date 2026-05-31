@@ -5,6 +5,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { deleteNotice } from "@/lib/notices/actions";
 import { Panel, Badge } from "@/components/ui";
 import NoticeCreateForm from "@/components/app/NoticeCreateForm";
+import { getT } from "@/lib/i18n/server";
 import type { Notice, OrgNode } from "@/lib/supabase/types";
 
 export const dynamic = "force-dynamic";
@@ -12,6 +13,7 @@ export const dynamic = "force-dynamic";
 export default async function NoticesPage() {
   const { profile } = await getSession();
   const admin = isAdmin(profile);
+  const t = await getT();
 
   const supabase = await createClient();
   const { data: notices } = await supabase
@@ -32,14 +34,14 @@ export default async function NoticesPage() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold">Notices</h1>
-          <p className="text-muted mt-1">Official announcements from party leadership.</p>
+          <h1 className="text-2xl font-bold">{t("notices.title")}</h1>
+          <p className="text-muted mt-1">{t("notices.subtitle")}</p>
         </div>
         {admin && <NoticeCreateForm districts={districts} />}
       </div>
 
       {list.length === 0 ? (
-        <Panel><p className="text-sm text-muted py-8 text-center">No notices yet.{admin ? " Post the first announcement above." : ""}</p></Panel>
+        <Panel><p className="text-sm text-muted py-8 text-center">{t("notices.empty")}</p></Panel>
       ) : (
         <div className="space-y-3">
           {list.map((n) => (
@@ -49,7 +51,7 @@ export default async function NoticesPage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
                     <h3 className="font-semibold">{n.title}</h3>
-                    {n.pinned && <Badge color="var(--warn)"><Pin size={11} /> Pinned</Badge>}
+                    {n.pinned && <Badge color="var(--warn)"><Pin size={11} /> {t("notices.pinned")}</Badge>}
                   </div>
                   {n.body && <p className="text-sm text-muted mt-1 whitespace-pre-wrap">{n.body}</p>}
                   <div className="text-xs text-muted mt-2">{new Date(n.created_at).toLocaleString()}</div>

@@ -45,6 +45,105 @@ export const DICT: Record<string, Entry> = {
   },
 };
 
+Object.assign(DICT, {
+  // Common
+  "common.cancel": { en: "Cancel", bn: "বাতিল" },
+  "common.submit": { en: "Submit", bn: "জমা দিন" },
+  "common.download": { en: "Download", bn: "ডাউনলোড" },
+
+  // Notices
+  "notices.title": { en: "Notices", bn: "নোটিশ" },
+  "notices.subtitle": { en: "Official announcements from party leadership.", bn: "দলীয় নেতৃত্বের অফিসিয়াল ঘোষণা।" },
+  "notices.empty": { en: "No notices yet.", bn: "এখনও কোনো নোটিশ নেই।" },
+  "notices.new": { en: "New notice", bn: "নতুন নোটিশ" },
+  "notices.pinned": { en: "Pinned", bn: "পিন করা" },
+
+  // Tasks
+  "tasks.title": { en: "Tasks & Missions", bn: "কাজ ও মিশন" },
+  "tasks.subtitle": { en: "Accept missions, complete them with geo-tagged proof, and earn points.", bn: "মিশন গ্রহণ করুন, জিও-ট্যাগ প্রমাণসহ সম্পন্ন করুন এবং পয়েন্ট অর্জন করুন।" },
+  "tasks.empty": { en: "No tasks yet.", bn: "এখনও কোনো কাজ নেই।" },
+  "tasks.new": { en: "New task", bn: "নতুন কাজ" },
+  "tasks.accept": { en: "Accept mission", bn: "মিশন গ্রহণ করুন" },
+  "tasks.submitProof": { en: "Submit proof", bn: "প্রমাণ জমা দিন" },
+  "tasks.reviewQueue": { en: "Submissions to review", bn: "যাচাইয়ের জন্য জমা" },
+  "tasks.verifyTake": { en: "Verify your membership to take tasks.", bn: "কাজ নিতে সদস্যপদ যাচাই করুন।" },
+  "tasks.describe": { en: "Describe what you did…", bn: "আপনি যা করেছেন তা লিখুন…" },
+  "tasks.attachPhoto": { en: "Attach photo (optional)", bn: "ছবি যুক্ত করুন (ঐচ্ছিক)" },
+  "tasks.locationNote": { en: "Your location is captured on submit", bn: "জমা দেওয়ার সময় আপনার অবস্থান নেওয়া হবে" },
+  "status.accepted": { en: "Accepted", bn: "গৃহীত" },
+  "status.in_progress": { en: "In progress", bn: "চলমান" },
+  "status.submitted": { en: "Awaiting review", bn: "যাচাইয়ের অপেক্ষায়" },
+  "status.approved": { en: "Approved", bn: "অনুমোদিত" },
+  "status.rejected": { en: "Rejected", bn: "প্রত্যাখ্যাত" },
+
+  // Events
+  "events.title": { en: "Events", bn: "অনুষ্ঠান" },
+  "events.subtitle": { en: "Rallies and meetings — check in to record your attendance.", bn: "সমাবেশ ও সভা — উপস্থিতি রেকর্ড করতে চেক-ইন করুন।" },
+  "events.empty": { en: "No events yet.", bn: "এখনও কোনো অনুষ্ঠান নেই।" },
+  "events.new": { en: "New event", bn: "নতুন অনুষ্ঠান" },
+  "events.checkin": { en: "Check in", bn: "চেক-ইন" },
+  "events.checkedIn": { en: "Checked in", bn: "চেক-ইন হয়েছে" },
+  "events.recorded": { en: "Attendance recorded", bn: "উপস্থিতি রেকর্ড হয়েছে" },
+  "events.checkedInCount": { en: "checked in", bn: "চেক-ইন" },
+  "events.expected": { en: "expected", bn: "প্রত্যাশিত" },
+
+  // Mobilise
+  "mobilize.title": { en: "Mobilisation", bn: "সমাবেশ" },
+  "mobilize.subtitle": { en: "Respond to call-ups in one tap — responses update live for everyone.", bn: "এক ট্যাপে ডাকে সাড়া দিন — সবার জন্য লাইভ আপডেট হয়।" },
+  "mobilize.empty": { en: "No active call-ups.", bn: "কোনো সক্রিয় ডাক নেই।" },
+  "mobilize.new": { en: "New call-up", bn: "নতুন ডাক" },
+  "mobilize.coming": { en: "I'm coming", bn: "আসছি" },
+  "mobilize.enroute": { en: "En route", bn: "পথে আছি" },
+  "mobilize.cant": { en: "Can't make it", bn: "পারছি না" },
+  "mobilize.statComing": { en: "Coming", bn: "আসছে" },
+  "mobilize.statEnroute": { en: "En route", bn: "পথে" },
+  "mobilize.statResponded": { en: "Responded", bn: "সাড়া দিয়েছে" },
+  "mobilize.verifyRespond": { en: "Verify your membership to respond.", bn: "সাড়া দিতে সদস্যপদ যাচাই করুন।" },
+
+  // Complaints
+  "complaints.title": { en: "Community Complaints", bn: "কমিউনিটি অভিযোগ" },
+  "complaints.subtitle": { en: "Report local issues with a photo and location — and track them to resolution.", bn: "ছবি ও অবস্থানসহ স্থানীয় সমস্যা জানান — সমাধান পর্যন্ত ট্র্যাক করুন।" },
+  "complaints.empty": { en: "No complaints yet.", bn: "এখনও কোনো অভিযোগ নেই।" },
+  "complaints.report": { en: "Report an issue", bn: "সমস্যা জানান" },
+  "complaints.you": { en: "You", bn: "আপনি" },
+  "cstatus.submitted": { en: "Submitted", bn: "জমা হয়েছে" },
+  "cstatus.assigned": { en: "Assigned", bn: "বরাদ্দকৃত" },
+  "cstatus.in_progress": { en: "In Progress", bn: "চলমান" },
+  "cstatus.solved": { en: "Solved", bn: "সমাধান হয়েছে" },
+  "cstatus.rejected": { en: "Rejected", bn: "প্রত্যাখ্যাত" },
+
+  // Documents
+  "documents.title": { en: "Documents", bn: "নথিপত্র" },
+  "documents.subtitle": { en: "Party constitution, circulars and official files.", bn: "দলীয় গঠনতন্ত্র, সার্কুলার ও অফিসিয়াল ফাইল।" },
+  "documents.empty": { en: "No documents yet.", bn: "এখনও কোনো নথি নেই।" },
+  "documents.upload": { en: "Upload document", bn: "নথি আপলোড" },
+
+  // Profile
+  "profile.title": { en: "Edit Profile", bn: "প্রোফাইল সম্পাদনা" },
+  "profile.subtitle": { en: "Your name, photo and contact details. Your designation and committee are set by your admin.", bn: "আপনার নাম, ছবি ও যোগাযোগের তথ্য। পদবি ও কমিটি অ্যাডমিন নির্ধারণ করেন।" },
+  "profile.back": { en: "Back", bn: "ফিরে যান" },
+  "profile.fullName": { en: "Full name", bn: "পূর্ণ নাম" },
+  "profile.nameBn": { en: "Name in Bangla", bn: "বাংলায় নাম" },
+  "profile.phone": { en: "Phone", bn: "ফোন" },
+  "profile.save": { en: "Save changes", bn: "পরিবর্তন সংরক্ষণ" },
+  "profile.saved": { en: "Saved", bn: "সংরক্ষিত" },
+  "profile.photoHint": { en: "Tap the camera to set your profile photo. It appears on your Digital ID.", bn: "প্রোফাইল ছবি সেট করতে ক্যামেরায় ট্যাপ করুন। এটি আপনার ডিজিটাল আইডিতে দেখাবে।" },
+  "profile.notifications": { en: "Notifications", bn: "বিজ্ঞপ্তি" },
+  "profile.notificationsSub": { en: "Get push alerts for notices and mobilisation call-ups", bn: "নোটিশ ও সমাবেশের ডাকে পুশ অ্যালার্ট পান" },
+  "notif.enable": { en: "Enable notifications", bn: "বিজ্ঞপ্তি চালু করুন" },
+  "notif.on": { en: "Notifications are on", bn: "বিজ্ঞপ্তি চালু আছে" },
+  "notif.blocked": { en: "Notifications blocked — enable them in your browser settings.", bn: "বিজ্ঞপ্তি ব্লক করা — ব্রাউজার সেটিংসে চালু করুন।" },
+
+  // Admin pages
+  "insights.title": { en: "Leader Dashboard", bn: "নেতৃত্ব ড্যাশবোর্ড" },
+  "insights.subtitle": { en: "Live organisational intelligence — computed from real member activity.", bn: "লাইভ সাংগঠনিক বুদ্ধিমত্তা — বাস্তব সদস্য কার্যকলাপ থেকে।" },
+  "search.title": { en: "Smart Search", bn: "স্মার্ট অনুসন্ধান" },
+  "search.subtitle": { en: "Ask in plain language — e.g. “inactive members in Gazipur”.", bn: "সহজ ভাষায় জিজ্ঞাসা করুন — যেমন “গাজীপুরে নিষ্ক্রিয় সদস্য”।" },
+  "search.placeholder": { en: "Search members by district, status, role…", bn: "জেলা, স্ট্যাটাস, ভূমিকা দিয়ে সদস্য খুঁজুন…" },
+  "admin.title": { en: "Admin · Member Verification", bn: "অ্যাডমিন · সদস্য যাচাই" },
+  "admin.subtitle": { en: "Approve new members and manage the roster.", bn: "নতুন সদস্য অনুমোদন করুন এবং তালিকা পরিচালনা করুন।" },
+});
+
 export function t(key: string, locale: Locale): string {
   const e = DICT[key];
   if (!e) return key;

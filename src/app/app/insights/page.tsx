@@ -5,6 +5,7 @@ import { getInsights } from "@/lib/insights/queries";
 import { KpiCard, Panel, Avatar, ScoreBar, scoreColor } from "@/components/ui";
 import { StatusDonut, DistrictsBar, EngagementTrend, InsightsMap } from "@/components/app/InsightsCharts";
 import { rankFor } from "@/lib/gamification";
+import { getT } from "@/lib/i18n/server";
 
 export const dynamic = "force-dynamic";
 
@@ -20,12 +21,13 @@ export default async function InsightsPage() {
   if (!isAdmin(profile)) redirect("/app");
 
   const d = await getInsights();
+  const t = await getT();
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Leader Dashboard</h1>
-        <p className="text-muted mt-1">Live organisational intelligence — computed from real member activity.</p>
+        <h1 className="text-2xl font-bold">{t("insights.title")}</h1>
+        <p className="text-muted mt-1">{t("insights.subtitle")}</p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

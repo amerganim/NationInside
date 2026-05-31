@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Plus, X, Upload, MapPin, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { submitComplaint } from "@/lib/complaints/actions";
+import { useT } from "@/lib/i18n/client";
 
 const CATEGORIES = [
   ["road", "Road"], ["water", "Water"], ["electricity", "Electricity"],
@@ -12,6 +13,7 @@ const CATEGORIES = [
 ];
 
 export default function ComplaintForm() {
+  const t = useT();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -64,7 +66,7 @@ export default function ComplaintForm() {
     return (
       <button onClick={() => setOpen(true)} className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-white"
         style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>
-        <Plus size={16} /> Report an issue
+        <Plus size={16} /> {t("complaints.report")}
       </button>
     );
   }

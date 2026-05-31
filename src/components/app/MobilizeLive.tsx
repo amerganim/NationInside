@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { Megaphone, Navigation, Check, X, Radio } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { respondMobilization } from "@/lib/mobilize/actions";
+import { useT } from "@/lib/i18n/client";
 
 type Resp = "coming" | "enroute" | "declined";
 
@@ -54,6 +55,7 @@ export default function MobilizeLive({
   }, [responses]);
 
   const mine = responses[myUserId];
+  const t = useT();
 
   return (
     <div className="panel p-5">
@@ -71,19 +73,19 @@ export default function MobilizeLive({
       </div>
 
       <div className="grid grid-cols-3 gap-3 mb-4">
-        <LiveStat label="Coming" value={counts.coming} color="var(--accent)" />
-        <LiveStat label="En route" value={counts.enroute} color="var(--warn)" />
-        <LiveStat label="Responded" value={counts.responded} color="var(--accent-2)" />
+        <LiveStat label={t("mobilize.statComing")} value={counts.coming} color="var(--accent)" />
+        <LiveStat label={t("mobilize.statEnroute")} value={counts.enroute} color="var(--warn)" />
+        <LiveStat label={t("mobilize.statResponded")} value={counts.responded} color="var(--accent-2)" />
       </div>
 
       {active ? (
         <div className="flex flex-wrap gap-2">
-          <RespondBtn mobId={mobilizationId} value="coming" current={mine} icon={<Check size={15} />} label="I'm coming" activeColor="var(--accent)" />
-          <RespondBtn mobId={mobilizationId} value="enroute" current={mine} icon={<Navigation size={15} />} label="En route" activeColor="var(--warn)" />
-          <RespondBtn mobId={mobilizationId} value="declined" current={mine} icon={<X size={15} />} label="Can't make it" activeColor="var(--danger)" />
+          <RespondBtn mobId={mobilizationId} value="coming" current={mine} icon={<Check size={15} />} label={t("mobilize.coming")} activeColor="var(--accent)" />
+          <RespondBtn mobId={mobilizationId} value="enroute" current={mine} icon={<Navigation size={15} />} label={t("mobilize.enroute")} activeColor="var(--warn)" />
+          <RespondBtn mobId={mobilizationId} value="declined" current={mine} icon={<X size={15} />} label={t("mobilize.cant")} activeColor="var(--danger)" />
         </div>
       ) : (
-        <p className="text-xs text-[var(--warn)]">Verify your membership to respond.</p>
+        <p className="text-xs text-[var(--warn)]">{t("mobilize.verifyRespond")}</p>
       )}
     </div>
   );

@@ -5,6 +5,7 @@ import { getSession, isAdmin } from "@/lib/auth/session";
 import { searchMembers } from "@/lib/insights/search";
 import { Panel, Badge, Avatar, scoreColor } from "@/components/ui";
 import { rankFor } from "@/lib/gamification";
+import { getT } from "@/lib/i18n/server";
 
 export const dynamic = "force-dynamic";
 
@@ -22,12 +23,13 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const { q } = await searchParams;
   const query = (q ?? "").trim();
   const res = query ? await searchMembers(query) : null;
+  const t = await getT();
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold flex items-center gap-2"><Sparkles size={20} className="text-[var(--accent)]" /> Smart Search</h1>
-        <p className="text-muted mt-1">Ask in plain language — e.g. “inactive members in Gazipur”.</p>
+        <h1 className="text-2xl font-bold flex items-center gap-2"><Sparkles size={20} className="text-[var(--accent)]" /> {t("search.title")}</h1>
+        <p className="text-muted mt-1">{t("search.subtitle")}</p>
       </div>
 
       <form method="GET" className="relative">
@@ -36,7 +38,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
           name="q"
           defaultValue={query}
           autoFocus
-          placeholder="Search members by district, status, role…"
+          placeholder={t("search.placeholder")}
           className="w-full pl-11 pr-4 py-3 rounded-xl bg-[#0d1626] border border-border outline-none focus:border-[var(--accent)]"
         />
       </form>

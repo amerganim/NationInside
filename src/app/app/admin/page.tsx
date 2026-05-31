@@ -4,6 +4,7 @@ import { getSession, isAdmin } from "@/lib/auth/session";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { approveMember, setMemberStatus } from "@/lib/admin/actions";
 import { Panel, Badge, Avatar } from "@/components/ui";
+import { getT } from "@/lib/i18n/server";
 import type { Profile, OrgNode } from "@/lib/supabase/types";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminPage() {
   const { profile } = await getSession();
   if (!isAdmin(profile)) redirect("/app");
+  const t = await getT();
 
   const db = createAdminClient();
   const [{ data: pending }, { data: active }, { data: districts }] = await Promise.all([
@@ -26,8 +28,8 @@ export default async function AdminPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Admin · Member Verification</h1>
-        <p className="text-muted mt-1">Approve new members and manage the roster.</p>
+        <h1 className="text-2xl font-bold">{t("admin.title")}</h1>
+        <p className="text-muted mt-1">{t("admin.subtitle")}</p>
       </div>
 
       <Panel

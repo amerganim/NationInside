@@ -5,16 +5,17 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { updateComplaintStatus } from "@/lib/complaints/actions";
 import { Panel, Badge } from "@/components/ui";
 import ComplaintForm from "@/components/app/ComplaintForm";
+import { getT } from "@/lib/i18n/server";
 import type { Complaint, ComplaintStatus } from "@/lib/supabase/types";
 
 export const dynamic = "force-dynamic";
 
-const STATUS_META: Record<ComplaintStatus, { label: string; color: string }> = {
-  submitted: { label: "Submitted", color: "var(--muted)" },
-  assigned: { label: "Assigned", color: "var(--accent-2)" },
-  in_progress: { label: "In Progress", color: "var(--warn)" },
-  solved: { label: "Solved", color: "var(--accent)" },
-  rejected: { label: "Rejected", color: "var(--danger)" },
+const STATUS_META: Record<ComplaintStatus, { key: string; color: string }> = {
+  submitted: { key: "cstatus.submitted", color: "var(--muted)" },
+  assigned: { key: "cstatus.assigned", color: "var(--accent-2)" },
+  in_progress: { key: "cstatus.in_progress", color: "var(--warn)" },
+  solved: { key: "cstatus.solved", color: "var(--accent)" },
+  rejected: { key: "cstatus.rejected", color: "var(--danger)" },
 };
 const FLOW: ComplaintStatus[] = ["submitted", "assigned", "in_progress", "solved"];
 const NEXT_ACTIONS: Record<ComplaintStatus, ComplaintStatus[]> = {
@@ -29,6 +30,7 @@ export default async function ComplaintsPage() {
   const { userId, profile } = await getSession();
   const admin = isAdmin(profile);
   const active = profile?.status === "active";
+  const t = await getT();
 
   const supabase = await createClient();
   const { data: complaints } = await supabase
@@ -52,10 +54,8 @@ export default async function ComplaintsPage() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold">Community Complaints</h1>
-          <p className="text-muted mt-1">
-            Report local issues with a photo and location — and track them from submission to resolution.
-          </p>
+          <h1 className="text-2xl font-bold">{t("complaints.title")}</h1>
+          <p className="text-muted mt-1">{t("complaints.subtitle")}</p>
         </div>
         {active && <ComplaintForm />}
       </div>
@@ -63,12 +63,12 @@ export default async function ComplaintsPage() {
       {list.length > 0 && (
         <div className="flex gap-3 text-sm">
           <Badge color="var(--muted)">{list.length} total</Badge>
-          <Badge color="var(--accent)">{solved} solved</Badge>
+          <Badge color="var(--accent)">{solved} {t("cstatus.solved")}</Badge>
         </div>
       )}
 
       {list.length === 0 ? (
-        <Panel><p className="text-sm text-muted py-8 text-center">No complaints yet.{active ? " Report the first issue above." : ""}</p></Panel>
+        <Panel><p className="text-sm text-muted py-8 text-center">{t("complaints.empty")}</p></Panel>
       ) : (
         <div className="grid sm:grid-cols-2 gap-4">
           {list.map((c) => {
@@ -81,11 +81,11 @@ export default async function ComplaintsPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <h3 className="font-semibold truncate">{c.title}</h3>
-                      {mine && <Badge color="var(--accent-2)">You</Badge>}
+                      {mine && <Badge color="var(--accent-2)">{t("complaints.you")}</Badge>}
                     </div>
                     <div className="text-xs text-muted mt-0.5 capitalize">{c.category}{c.location ? ` · ${c.location}` : ""}</div>
                   </div>
-                  <Badge color={meta.color}>{meta.label}</Badge>
+                  <Badge color={meta.color}>{t(meta.key)}</Badge>
                 </div>
 
                 {c.description && <p className="text-sm text-muted mt-2 line-clamp-3">{c.description}</p>}
@@ -114,7 +114,7 @@ export default async function ComplaintsPage() {
                         <input type="hidden" name="status" value={s} />
                         <button className="rounded-lg px-3 py-1.5 text-xs font-medium border border-border hover:bg-white/5"
                           style={s === "solved" ? { background: "var(--accent)", color: "#04130c", borderColor: "var(--accent)" } : s === "rejected" ? { color: "var(--danger)" } : undefined}>
-                          {STATUS_META[s].label}
+                          {t(STATUS_META[s].key)}
                         </button>
                       </form>
                     ))}

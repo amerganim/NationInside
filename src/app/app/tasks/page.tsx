@@ -6,22 +6,24 @@ import { acceptTask, reviewTask } from "@/lib/tasks/actions";
 import { Panel, Badge } from "@/components/ui";
 import TaskCreateForm from "@/components/app/TaskCreateForm";
 import TaskSubmitForm from "@/components/app/TaskSubmitForm";
+import { getT } from "@/lib/i18n/server";
 import type { TaskRow, TaskAssignment, OrgNode } from "@/lib/supabase/types";
 
 export const dynamic = "force-dynamic";
 
-const STATUS_BADGE: Record<string, { label: string; color: string }> = {
-  assigned: { label: "Accepted", color: "var(--accent-2)" },
-  in_progress: { label: "In progress", color: "var(--accent-2)" },
-  submitted: { label: "Awaiting review", color: "var(--warn)" },
-  approved: { label: "Approved", color: "var(--accent)" },
-  rejected: { label: "Rejected", color: "var(--danger)" },
+const STATUS_BADGE: Record<string, { key: string; color: string }> = {
+  assigned: { key: "status.accepted", color: "var(--accent-2)" },
+  in_progress: { key: "status.in_progress", color: "var(--accent-2)" },
+  submitted: { key: "status.submitted", color: "var(--warn)" },
+  approved: { key: "status.approved", color: "var(--accent)" },
+  rejected: { key: "status.rejected", color: "var(--danger)" },
 };
 
 export default async function TasksPage() {
   const { profile } = await getSession();
   const admin = isAdmin(profile);
   const active = profile?.status === "active";
+  const tr = await getT();
 
   const supabase = await createClient();
   const [{ data: tasks }, { data: myAssignments }] = await Promise.all([
@@ -51,14 +53,14 @@ export default async function TasksPage() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold">Tasks &amp; Missions</h1>
-          <p className="text-muted mt-1">Accept missions, complete them with geo-tagged proof, and earn points.</p>
+          <h1 className="text-2xl font-bold">{tr("tasks.title")}</h1>
+          <p className="text-muted mt-1">{tr("tasks.subtitle")}</p>
         </div>
         {admin && <TaskCreateForm districts={districts} />}
       </div>
 
       {admin && reviewQueue.length > 0 && (
-        <Panel title={`Submissions to review (${reviewQueue.length})`} subtitle="Approve to award points">
+        <Panel title={`${tr("tasks.reviewQueue")} (${reviewQueue.length})`} subtitle="Approve to award points">
           <ul className="space-y-3">
             {reviewQueue.map((r) => (
               <li key={r.id} className="rounded-xl border border-border bg-[#0d1626] p-4">
@@ -94,7 +96,7 @@ export default async function TasksPage() {
       )}
 
       {taskList.length === 0 ? (
-        <Panel><p className="text-sm text-muted py-8 text-center">No tasks yet.{admin ? " Create the first mission above." : ""}</p></Panel>
+        <Panel><p className="text-sm text-muted py-8 text-center">{tr("tasks.empty")}</p></Panel>
       ) : (
         <div className="grid sm:grid-cols-2 gap-4">
           {taskList.map((t) => {
@@ -116,16 +118,16 @@ export default async function TasksPage() {
 
                 <div className="mt-4">
                   {!active ? (
-                    <p className="text-xs text-[var(--warn)]">Verify your membership to take tasks.</p>
+                    <p className="text-xs text-[var(--warn)]">{tr("tasks.verifyTake")}</p>
                   ) : !a ? (
                     <form action={acceptTask}>
                       <input type="hidden" name="task_id" value={t.id} />
-                      <button className="rounded-lg px-4 py-2 text-sm font-medium border border-border hover:bg-white/5">Accept mission</button>
+                      <button className="rounded-lg px-4 py-2 text-sm font-medium border border-border hover:bg-white/5">{tr("tasks.accept")}</button>
                     </form>
                   ) : a.status === "assigned" || a.status === "in_progress" ? (
                     <TaskSubmitForm assignmentId={a.id} />
                   ) : (
-                    badge && <Badge color={badge.color}>{badge.label}{a.status === "approved" ? ` · +${a.points_awarded}` : ""}</Badge>
+                    badge && <Badge color={badge.color}>{tr(badge.key)}{a.status === "approved" ? ` · +${a.points_awarded}` : ""}</Badge>
                   )}
                 </div>
               </div>

@@ -5,6 +5,7 @@ import { getSession } from "@/lib/auth/session";
 import { Panel } from "@/components/ui";
 import ProfileEditForm from "@/components/app/ProfileEditForm";
 import EnableNotifications from "@/components/app/EnableNotifications";
+import { getT } from "@/lib/i18n/server";
 
 export const dynamic = "force-dynamic";
 
@@ -14,15 +15,16 @@ export default async function ProfilePage() {
 
   const name = profile?.full_name || email || "Member";
   const initials = name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase() || "M";
+  const t = await getT();
 
   return (
     <div className="max-w-xl mx-auto space-y-6">
       <Link href="/app" className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground">
-        <ArrowLeft size={16} /> Back
+        <ArrowLeft size={16} /> {t("profile.back")}
       </Link>
       <div>
-        <h1 className="text-2xl font-bold">Edit Profile</h1>
-        <p className="text-muted mt-1">Your name, photo and contact details. Your designation and committee are set by your admin.</p>
+        <h1 className="text-2xl font-bold">{t("profile.title")}</h1>
+        <p className="text-muted mt-1">{t("profile.subtitle")}</p>
       </div>
       <Panel>
         <ProfileEditForm
@@ -37,7 +39,7 @@ export default async function ProfilePage() {
         />
       </Panel>
 
-      <Panel title="Notifications" subtitle="Get push alerts for notices and mobilisation call-ups">
+      <Panel title={t("profile.notifications")} subtitle={t("profile.notificationsSub")}>
         <EnableNotifications />
       </Panel>
     </div>

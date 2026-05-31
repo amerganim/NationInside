@@ -4,8 +4,10 @@ import { useState, useTransition } from "react";
 import { MapPin, Upload, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { submitTask } from "@/lib/tasks/actions";
+import { useT } from "@/lib/i18n/client";
 
 export default function TaskSubmitForm({ assignmentId }: { assignmentId: string }) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -61,27 +63,27 @@ export default function TaskSubmitForm({ assignmentId }: { assignmentId: string 
     return (
       <button onClick={() => setOpen(true)} className="rounded-lg px-3 py-1.5 text-sm font-medium text-white"
         style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>
-        Submit proof
+        {t("tasks.submitProof")}
       </button>
     );
   }
 
   return (
     <div className="mt-3 p-3 rounded-lg bg-[#0a1320] border border-border space-y-2">
-      <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={2} placeholder="Describe what you did…"
+      <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={2} placeholder={t("tasks.describe")}
         className="w-full px-2.5 py-2 rounded-lg bg-[#0d1626] border border-border text-sm outline-none focus:border-[var(--accent)]" />
       <label className="flex items-center gap-2 text-xs text-muted cursor-pointer">
-        <Upload size={14} /> {file ? file.name : "Attach photo (optional)"}
+        <Upload size={14} /> {file ? file.name : t("tasks.attachPhoto")}
         <input type="file" accept="image/*" className="hidden" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
       </label>
-      <div className="flex items-center gap-1 text-[11px] text-muted"><MapPin size={12} /> Your location is captured on submit</div>
+      <div className="flex items-center gap-1 text-[11px] text-muted"><MapPin size={12} /> {t("tasks.locationNote")}</div>
       {err && <p className="text-xs text-[var(--danger)]">{err}</p>}
       <div className="flex gap-2">
         <button onClick={handleSubmit} disabled={busy || pending} className="rounded-lg px-3 py-1.5 text-sm font-medium text-white disabled:opacity-60 inline-flex items-center gap-1.5"
           style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>
-          {(busy || pending) && <Loader2 size={13} className="animate-spin" />} Submit
+          {(busy || pending) && <Loader2 size={13} className="animate-spin" />} {t("common.submit")}
         </button>
-        <button onClick={() => setOpen(false)} className="rounded-lg px-3 py-1.5 text-sm text-muted border border-border">Cancel</button>
+        <button onClick={() => setOpen(false)} className="rounded-lg px-3 py-1.5 text-sm text-muted border border-border">{t("common.cancel")}</button>
       </div>
     </div>
   );

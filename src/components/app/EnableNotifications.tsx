@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Bell, BellRing, BellOff, Loader2 } from "lucide-react";
 import { saveSubscription } from "@/lib/push/actions";
+import { useT } from "@/lib/i18n/client";
 
 function urlB64ToUint8Array(base64: string): Uint8Array<ArrayBuffer> {
   const padding = "=".repeat((4 - (base64.length % 4)) % 4);
@@ -18,6 +19,7 @@ type State = "loading" | "unsupported" | "default" | "denied" | "subscribed" | "
 export default function EnableNotifications() {
   const [state, setState] = useState<State>("loading");
   const [err, setErr] = useState<string | null>(null);
+  const t = useT();
 
   useEffect(() => {
     if (typeof window === "undefined" || !("serviceWorker" in navigator) || !("PushManager" in window) || !("Notification" in window)) {
@@ -58,7 +60,7 @@ export default function EnableNotifications() {
   if (state === "subscribed") {
     return (
       <div className="flex items-center gap-2 text-sm text-[var(--accent)]">
-        <BellRing size={16} /> Notifications are on
+        <BellRing size={16} /> {t("notif.on")}
       </div>
     );
   }
@@ -66,7 +68,7 @@ export default function EnableNotifications() {
   if (state === "denied") {
     return (
       <div className="flex items-center gap-2 text-sm text-muted">
-        <BellOff size={16} /> Notifications blocked — enable them in your browser settings.
+        <BellOff size={16} /> {t("notif.blocked")}
       </div>
     );
   }
@@ -76,7 +78,7 @@ export default function EnableNotifications() {
       <button onClick={enable} disabled={state === "working"}
         className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium border border-border hover:bg-white/5 disabled:opacity-60">
         {state === "working" ? <Loader2 size={16} className="animate-spin" /> : <Bell size={16} />}
-        Enable notifications
+        {t("notif.enable")}
       </button>
       {err && <p className="text-xs text-[var(--danger)] mt-1">{err}</p>}
     </div>

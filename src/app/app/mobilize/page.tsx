@@ -4,6 +4,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { Panel } from "@/components/ui";
 import MobilizeCreateForm from "@/components/app/MobilizeCreateForm";
 import MobilizeLive from "@/components/app/MobilizeLive";
+import { getT } from "@/lib/i18n/server";
 import type { Mobilization, OrgNode } from "@/lib/supabase/types";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +14,7 @@ export default async function MobilizePage() {
   const admin = isAdmin(profile);
   const active = profile?.status === "active";
 
+  const t = await getT();
   const supabase = await createClient();
   const [{ data: mobs }, { data: responses }] = await Promise.all([
     supabase.from("mobilizations").select("*").order("created_at", { ascending: false }).limit(20),
@@ -32,14 +34,14 @@ export default async function MobilizePage() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold">Mobilisation</h1>
-          <p className="text-muted mt-1">Respond to call-ups in one tap — responses update live for everyone.</p>
+          <h1 className="text-2xl font-bold">{t("mobilize.title")}</h1>
+          <p className="text-muted mt-1">{t("mobilize.subtitle")}</p>
         </div>
         {admin && <MobilizeCreateForm districts={districts} />}
       </div>
 
       {mobList.length === 0 ? (
-        <Panel><p className="text-sm text-muted py-8 text-center">No active call-ups.{admin ? " Issue one above." : ""}</p></Panel>
+        <Panel><p className="text-sm text-muted py-8 text-center">{t("mobilize.empty")}</p></Panel>
       ) : (
         <div className="grid gap-4">
           {mobList.map((m) => (

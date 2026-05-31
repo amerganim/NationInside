@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { deleteDocument } from "@/lib/documents/actions";
 import { Panel } from "@/components/ui";
 import DocumentUploadForm from "@/components/app/DocumentUploadForm";
+import { getT } from "@/lib/i18n/server";
 import type { DocumentRow } from "@/lib/supabase/types";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,7 @@ export const dynamic = "force-dynamic";
 export default async function DocumentsPage() {
   const { profile } = await getSession();
   const admin = isAdmin(profile);
+  const t = await getT();
 
   const supabase = await createClient();
   const { data: docs } = await supabase.from("documents").select("*").order("created_at", { ascending: false });
@@ -20,14 +22,14 @@ export default async function DocumentsPage() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold">Documents</h1>
-          <p className="text-muted mt-1">Party constitution, circulars and official files.</p>
+          <h1 className="text-2xl font-bold">{t("documents.title")}</h1>
+          <p className="text-muted mt-1">{t("documents.subtitle")}</p>
         </div>
         {admin && <DocumentUploadForm />}
       </div>
 
       {list.length === 0 ? (
-        <Panel><p className="text-sm text-muted py-8 text-center">No documents yet.{admin ? " Upload the first file above." : ""}</p></Panel>
+        <Panel><p className="text-sm text-muted py-8 text-center">{t("documents.empty")}</p></Panel>
       ) : (
         <div className="grid sm:grid-cols-2 gap-4">
           {list.map((d) => (
@@ -39,7 +41,7 @@ export default async function DocumentsPage() {
                 <div className="flex items-center gap-3 mt-3">
                   <a href={d.file_url} target="_blank" rel="noopener"
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--accent)] hover:underline">
-                    <Download size={15} /> Download
+                    <Download size={15} /> {t("common.download")}
                   </a>
                   <span className="text-xs text-muted">{new Date(d.created_at).toLocaleDateString()}</span>
                 </div>
