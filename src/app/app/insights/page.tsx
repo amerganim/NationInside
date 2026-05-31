@@ -4,6 +4,7 @@ import { getSession, isAdmin } from "@/lib/auth/session";
 import { getInsights } from "@/lib/insights/queries";
 import { KpiCard, Panel, Avatar, ScoreBar, scoreColor } from "@/components/ui";
 import { StatusDonut, DistrictsBar } from "@/components/app/InsightsCharts";
+import { rankFor } from "@/lib/gamification";
 
 export const dynamic = "force-dynamic";
 
@@ -64,7 +65,7 @@ export default async function InsightsPage() {
                   <Avatar initials={(m.name.split(" ").map((w) => w[0]).slice(0, 2).join("") || "M").toUpperCase()} hue={200} size={34} />
                   <div className="min-w-0 flex-1">
                     <div className="text-sm font-medium truncate">{m.name}</div>
-                    <div className="text-xs text-muted truncate">{m.designation}</div>
+                    <div className="text-xs truncate" style={{ color: rankFor(m.score).color }}>{rankFor(m.score).name}</div>
                   </div>
                   <div className="w-24">
                     <div className="flex justify-between text-xs mb-0.5"><span className="text-muted">Score</span><span className="font-bold" style={{ color: scoreColor(m.score) }}>{m.score}</span></div>
