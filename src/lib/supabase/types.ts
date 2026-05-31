@@ -107,6 +107,25 @@ export interface MobilizationResponse {
   responded_at: string;
 }
 
+export type ComplaintStatus = "submitted" | "assigned" | "in_progress" | "solved" | "rejected";
+
+export interface Complaint {
+  id: string;
+  title: string;
+  description: string | null;
+  category: string;
+  photo_url: string | null;
+  location: string | null;
+  lat: number | null;
+  lng: number | null;
+  status: ComplaintStatus;
+  org_node_id: string | null;
+  submitted_by: string | null;
+  assigned_to: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Notice {
   id: string;
   title: string;

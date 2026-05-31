@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Target, CalendarDays, Megaphone, ShieldCheck, BarChart3, Bell } from "lucide-react";
+import { Home, Target, CalendarDays, Megaphone, ShieldCheck, BarChart3, Bell, MessageSquareWarning } from "lucide-react";
 
 const BASE = [
   { href: "/app", label: "Home", icon: Home },
@@ -10,6 +10,7 @@ const BASE = [
   { href: "/app/tasks", label: "Tasks", icon: Target },
   { href: "/app/events", label: "Events", icon: CalendarDays },
   { href: "/app/mobilize", label: "Mobilise", icon: Megaphone },
+  { href: "/app/complaints", label: "Complaints", icon: MessageSquareWarning },
 ];
 
 const ADMIN = [
