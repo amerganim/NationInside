@@ -29,7 +29,7 @@ export default function MemberIdCard({
       style={{ background: "linear-gradient(160deg,#0e1a2c,#0a1320)" }}>
       <div className="px-5 pt-4 pb-3 relative" style={{ background: "linear-gradient(135deg,var(--bd-green),#024)" }}>
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl grid place-items-center font-bold text-white bg-white/15">নি</div>
+          <div className="w-10 h-10 rounded-xl grid place-items-center font-bold text-white bg-white/15">N</div>
           <div className="leading-tight">
             <div className="text-white font-bold text-sm">Bangladesh National Party</div>
             <div className="text-white/70 text-[10px] uppercase tracking-widest">Digital Member ID</div>

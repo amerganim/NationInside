@@ -100,7 +100,7 @@ export default function AssistantChat() {
       id: 0,
       role: "ai",
       content: (
-        <p>Hello, General Secretary. I’m your NationInside assistant. Ask me anything about the organisation — or tap a suggestion below.</p>
+        <p>Hello, General Secretary. I’m your Nation Inside assistant. Ask me anything about the organisation — or tap a suggestion below.</p>
       ),
     },
   ]);
@@ -133,7 +133,7 @@ export default function AssistantChat() {
           <Sparkles size={16} />
         </span>
         <div>
-          <div className="font-semibold text-sm">NationInside Assistant</div>
+          <div className="font-semibold text-sm">Nation Inside Assistant</div>
           <div className="text-[11px] text-muted">Demo · scripted responses on real data</div>
         </div>
       </div>

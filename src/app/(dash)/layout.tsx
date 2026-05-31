@@ -1,4 +1,5 @@
 import Sidebar from "@/components/Sidebar";
+import MobileNav from "@/components/MobileNav";
 import { LiveDot } from "@/components/ui";
 
 export default function DashLayout({ children }: { children: React.ReactNode }) {
@@ -8,7 +9,8 @@ export default function DashLayout({ children }: { children: React.ReactNode }) 
       <div className="flex-1 min-w-0">
         <header className="sticky top-0 z-20 glass px-5 md:px-8 py-3 flex items-center justify-between border-b border-border">
           <div className="flex items-center gap-3">
-            <span className="md:hidden font-bold">NationInside</span>
+            <MobileNav />
+            <span className="md:hidden font-bold">Nation Inside</span>
             <span className="hidden md:inline text-sm text-muted">
               Bangladesh · National Organisation
             </span>

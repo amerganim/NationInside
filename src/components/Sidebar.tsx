@@ -2,26 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  Network,
-  IdCard,
-  Megaphone,
-  Trophy,
-  Vote,
-  Sparkles,
-  MonitorPlay,
-} from "lucide-react";
-
-const NAV = [
-  { href: "/", label: "National Dashboard", icon: LayoutDashboard },
-  { href: "/hierarchy", label: "Organisation Tree", icon: Network },
-  { href: "/members", label: "Members & Digital ID", icon: IdCard },
-  { href: "/mobilize", label: "One-Tap Mobilisation", icon: Megaphone },
-  { href: "/activity", label: "Activity Score", icon: Trophy },
-  { href: "/nominations", label: "Nomination Intelligence", icon: Vote },
-  { href: "/assistant", label: "AI Assistant", icon: Sparkles },
-];
+import { MonitorPlay } from "lucide-react";
+import { DEMO_NAV as NAV } from "@/components/demoNav";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -30,10 +12,10 @@ export default function Sidebar() {
       <div className="px-5 py-5 flex items-center gap-3 border-b border-border">
         <div className="w-9 h-9 rounded-xl grid place-items-center font-bold text-white"
           style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>
-          নি
+          N
         </div>
         <div>
-          <div className="font-bold leading-tight">NationInside</div>
+          <div className="font-bold leading-tight">Nation Inside</div>
           <div className="text-[10px] uppercase tracking-widest text-muted">Party OS</div>
         </div>
       </div>

@@ -7,11 +7,11 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NationInside — Party Operating System",
+  title: "Nation Inside — Party Operating System",
   description:
     "See your whole party. Measure who's real. Mobilise them instantly. A digital operating system for political organisations.",
   manifest: "/manifest.webmanifest",
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "NationInside" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Nation Inside" },
 };
 
 export const viewport: Viewport = {

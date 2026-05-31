@@ -21,8 +21,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <div className="max-w-5xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between gap-3">
           <Link href="/app" className="flex items-center gap-2.5 shrink-0">
             <div className="w-9 h-9 rounded-xl grid place-items-center font-bold text-white"
-              style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>নি</div>
-            <span className="font-bold hidden sm:block">NationInside</span>
+              style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>N</div>
+            <span className="font-bold hidden sm:block">Nation Inside</span>
           </Link>
 
           <AppNav isAdmin={isAdmin(profile)} />

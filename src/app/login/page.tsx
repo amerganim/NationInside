@@ -12,9 +12,9 @@ export default async function LoginPage({
       <div className="w-full max-w-sm">
         <Link href="/" className="flex items-center gap-3 justify-center mb-8">
           <div className="w-11 h-11 rounded-xl grid place-items-center font-bold text-white"
-            style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>নি</div>
+            style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>N</div>
           <div>
-            <div className="font-bold text-lg leading-tight">NationInside</div>
+            <div className="font-bold text-lg leading-tight">Nation Inside</div>
             <div className="text-[11px] uppercase tracking-widest text-muted">Member Portal</div>
           </div>
         </Link>
