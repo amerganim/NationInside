@@ -107,6 +107,18 @@ export interface MobilizationResponse {
   responded_at: string;
 }
 
+export interface DocumentRow {
+  id: string;
+  title: string;
+  description: string | null;
+  file_url: string;
+  file_name: string | null;
+  file_type: string | null;
+  org_node_id: string | null;
+  uploaded_by: string | null;
+  created_at: string;
+}
+
 export type ComplaintStatus = "submitted" | "assigned" | "in_progress" | "solved" | "rejected";
 
 export interface Complaint {

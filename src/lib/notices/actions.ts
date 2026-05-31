@@ -3,18 +3,31 @@
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth/session";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { sendPushToOrg } from "@/lib/push/send";
 
 export async function createNotice(formData: FormData) {
   const { profile } = await requireAdmin();
   const db = createAdminClient();
+  const title = String(formData.get("title")).trim();
+  const body = String(formData.get("body") || "") || null;
+  const orgNodeId = String(formData.get("org_node_id") || "") || profile?.org_node_id || null;
+
   const { error } = await db.from("notices").insert({
-    title: String(formData.get("title")).trim(),
-    body: String(formData.get("body") || "") || null,
+    title,
+    body,
     pinned: formData.get("pinned") === "on",
-    org_node_id: String(formData.get("org_node_id") || "") || profile?.org_node_id || null,
+    org_node_id: orgNodeId,
     created_by: profile!.id,
   });
   if (error) throw new Error(error.message);
+
+  await sendPushToOrg(orgNodeId, {
+    title: `📢 ${title}`,
+    body: body ?? "New notice from party leadership",
+    url: "/app/notices",
+    tag: "notice",
+  });
+
   revalidatePath("/app/notices");
   revalidatePath("/app");
 }

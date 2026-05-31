@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth/session";
 import { Panel } from "@/components/ui";
 import ProfileEditForm from "@/components/app/ProfileEditForm";
+import EnableNotifications from "@/components/app/EnableNotifications";
 
 export const dynamic = "force-dynamic";
 
@@ -34,6 +35,10 @@ export default async function ProfilePage() {
             initials,
           }}
         />
+      </Panel>
+
+      <Panel title="Notifications" subtitle="Get push alerts for notices and mobilisation call-ups">
+        <EnableNotifications />
       </Panel>
     </div>
   );
