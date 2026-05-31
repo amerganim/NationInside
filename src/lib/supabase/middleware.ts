@@ -5,6 +5,12 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
+  // Only the authenticated app and auth pages need a session check. Skip the
+  // (network) getUser() call entirely for the landing page, /demo, etc.
+  const path = request.nextUrl.pathname;
+  const needsAuth = path.startsWith("/app") || path === "/login" || path === "/register";
+  if (!needsAuth) return response;
+
   // If env isn't configured yet, don't block the public demo.
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     return response;
@@ -31,7 +37,6 @@ export async function updateSession(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  const path = request.nextUrl.pathname;
   const isProtected = path.startsWith("/app");
   const isAuthPage = path === "/login" || path === "/register";
 
