@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/server";
 import { Panel, ScoreBar, scoreColor } from "@/components/ui";
 import MemberIdCard from "@/components/app/MemberIdCard";
 import { rankProgress, computeBadges, tierColor, type BadgeProgress } from "@/lib/gamification";
+import { getLocale } from "@/lib/i18n/server";
+import { t as translate } from "@/lib/i18n/dict";
 
 export const dynamic = "force-dynamic";
 
@@ -32,22 +34,23 @@ export default async function MemberHome() {
 
   const { current, next, pct } = rankProgress(score);
   const badges = computeBadges(counts);
+  const locale = await getLocale();
+  const t = (k: string) => translate(k, locale);
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Welcome, {name.split(" ")[0]} 👋</h1>
-        <p className="text-muted mt-1">Your party dashboard.</p>
+        <h1 className="text-2xl font-bold">{t("home.welcome")}, {name.split(" ")[0]} 👋</h1>
+        <p className="text-muted mt-1">{t("home.subtitle")}</p>
       </div>
 
       {pending && (
         <div className="panel p-5 border-l-4 flex items-start gap-3" style={{ borderLeftColor: "var(--warn)" }}>
           <Clock size={20} className="text-[var(--warn)] mt-0.5 shrink-0" />
           <div>
-            <div className="font-semibold">Your account is awaiting verification</div>
+            <div className="font-semibold">{t("home.pendingTitle")}</div>
             <p className="text-sm text-muted mt-1">
-              A district admin will review and approve your membership shortly. Some
-              features unlock once you are verified. You can still set up your profile.
+              {t("home.pendingBody")}
             </p>
           </div>
         </div>
@@ -66,12 +69,12 @@ export default async function MemberHome() {
             photoUrl={profile?.photo_url}
           />
           <Link href="/app/profile" className="inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:underline">
-            <Pencil size={14} /> Edit profile &amp; photo
+            <Pencil size={14} /> {t("chrome.editProfile")}
           </Link>
         </div>
 
         <div className="lg:col-span-2 space-y-4">
-          <Panel title="Your Activity Score" subtitle="Earned from attendance, missions and mobilisation">
+          <Panel title={t("home.activityScore")} subtitle={t("home.activityScoreSub")}>
             <div className="flex items-end justify-between mb-2">
               <span className="text-4xl font-bold" style={{ color: scoreColor(score) }}>{score}</span>
               <span className="inline-flex items-center gap-1.5 text-sm font-medium px-2.5 py-1 rounded-full"
@@ -82,20 +85,20 @@ export default async function MemberHome() {
             <ScoreBar score={score} />
             <div className="flex items-center gap-1 mt-2 text-xs text-muted">
               <TrendingUp size={12} />
-              {next ? <>{pct}% towards <span className="text-foreground font-medium">{next.name}</span></> : "Highest rank reached 🎉"}
+              {next ? <>{pct}% {t("home.towards")} <span className="text-foreground font-medium">{next.name}</span></> : t("home.maxRank")}
             </div>
           </Panel>
 
-          <Panel title="Achievements" subtitle="Earn badges by getting active">
+          <Panel title={t("home.achievements")} subtitle={t("home.achievementsSub")}>
             <div className="grid grid-cols-3 gap-3">
               {badges.map((b) => <BadgeCard key={b.key} badge={b} />)}
             </div>
           </Panel>
 
           <div className="grid sm:grid-cols-3 gap-4">
-            <QuickLink href="/app/tasks" icon={<Target size={20} />} label="My Tasks" desc="Missions assigned to you" />
-            <QuickLink href="/app/events" icon={<CalendarDays size={20} />} label="Events" desc="Check in with QR" />
-            <QuickLink href="/app/mobilize" icon={<Megaphone size={20} />} label="Mobilise" desc="Respond to call-ups" />
+            <QuickLink href="/app/tasks" icon={<Target size={20} />} label={t("home.myTasks")} desc={t("home.myTasksDesc")} />
+            <QuickLink href="/app/events" icon={<CalendarDays size={20} />} label={t("nav.events")} desc={t("home.eventsDesc")} />
+            <QuickLink href="/app/mobilize" icon={<Megaphone size={20} />} label={t("nav.mobilize")} desc={t("home.mobilizeDesc")} />
           </div>
         </div>
       </div>

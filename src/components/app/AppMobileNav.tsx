@@ -9,11 +9,14 @@ import { signOut } from "@/lib/auth/actions";
 import { Avatar } from "@/components/ui";
 import { MEMBER_NAV, ADMIN_NAV, isActive, type NavItem } from "@/components/app/appNavItems";
 import type { SidebarUser } from "@/components/app/AppSidebar";
+import { useT } from "@/lib/i18n/client";
+import LanguageToggle from "@/components/app/LanguageToggle";
 
 export default function AppMobileNav({ isAdmin, user }: { isAdmin: boolean; user: SidebarUser }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const t = useT();
 
   useEffect(() => setMounted(true), []);
   useEffect(() => setOpen(false), [pathname]);
@@ -31,7 +34,7 @@ export default function AppMobileNav({ isAdmin, user }: { isAdmin: boolean; user
           active ? "bg-[var(--accent)]/15 text-foreground font-medium" : "text-muted hover:text-foreground hover:bg-white/5"
         }`}>
         <Icon size={18} className={active ? "text-[var(--accent)]" : ""} />
-        {item.label}
+        {t(item.labelKey)}
       </Link>
     );
   }
@@ -46,7 +49,7 @@ export default function AppMobileNav({ isAdmin, user }: { isAdmin: boolean; user
               style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>N</div>
             <div>
               <div className="font-bold leading-tight">Nation Inside</div>
-              <div className="text-[10px] uppercase tracking-widest text-muted">Member Portal</div>
+              <div className="text-[10px] uppercase tracking-widest text-muted">{t("chrome.memberPortal")}</div>
             </div>
           </div>
           <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2 text-muted hover:text-foreground"><X size={20} /></button>
@@ -56,11 +59,15 @@ export default function AppMobileNav({ isAdmin, user }: { isAdmin: boolean; user
           {MEMBER_NAV.map((item) => <Item key={item.href} item={item} />)}
           {isAdmin && (
             <>
-              <div className="px-3 pt-4 pb-1 text-[10px] uppercase tracking-widest text-muted">Administration</div>
+              <div className="px-3 pt-4 pb-1 text-[10px] uppercase tracking-widest text-muted">{t("chrome.administration")}</div>
               {ADMIN_NAV.map((item) => <Item key={item.href} item={item} />)}
             </>
           )}
         </nav>
+
+        <div className="px-3 py-2 border-t border-border flex justify-center">
+          <LanguageToggle />
+        </div>
 
         <div className="p-3 border-t border-border flex items-center gap-3">
           <Link href="/app/profile" onClick={() => setOpen(false)} className="flex items-center gap-2.5 min-w-0 flex-1">

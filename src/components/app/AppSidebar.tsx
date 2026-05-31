@@ -6,6 +6,8 @@ import { LogOut } from "lucide-react";
 import { signOut } from "@/lib/auth/actions";
 import { Avatar } from "@/components/ui";
 import { MEMBER_NAV, ADMIN_NAV, isActive, type NavItem } from "@/components/app/appNavItems";
+import { useT } from "@/lib/i18n/client";
+import LanguageToggle from "@/components/app/LanguageToggle";
 
 export interface SidebarUser {
   name: string;
@@ -14,7 +16,7 @@ export interface SidebarUser {
   initials: string;
 }
 
-function Item({ item, pathname }: { item: NavItem; pathname: string }) {
+function Item({ item, pathname, label }: { item: NavItem; pathname: string; label: string }) {
   const active = isActive(item.href, pathname);
   const Icon = item.icon;
   return (
@@ -25,13 +27,14 @@ function Item({ item, pathname }: { item: NavItem; pathname: string }) {
       }`}
     >
       <Icon size={18} className={active ? "text-[var(--accent)]" : ""} />
-      {item.label}
+      {label}
     </Link>
   );
 }
 
 export default function AppSidebar({ isAdmin, user }: { isAdmin: boolean; user: SidebarUser }) {
   const pathname = usePathname();
+  const t = useT();
   return (
     <aside className="w-[240px] shrink-0 h-screen sticky top-0 hidden md:flex flex-col border-r border-border bg-[#0b1322]/70 backdrop-blur">
       <Link href="/app" className="px-5 py-5 flex items-center gap-3 border-b border-border">
@@ -39,19 +42,23 @@ export default function AppSidebar({ isAdmin, user }: { isAdmin: boolean; user: 
           style={{ background: "linear-gradient(135deg, var(--bd-green), var(--accent))" }}>N</div>
         <div>
           <div className="font-bold leading-tight">Nation Inside</div>
-          <div className="text-[10px] uppercase tracking-widest text-muted">Member Portal</div>
+          <div className="text-[10px] uppercase tracking-widest text-muted">{t("chrome.memberPortal")}</div>
         </div>
       </Link>
 
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        {MEMBER_NAV.map((item) => <Item key={item.href} item={item} pathname={pathname} />)}
+        {MEMBER_NAV.map((item) => <Item key={item.href} item={item} pathname={pathname} label={t(item.labelKey)} />)}
         {isAdmin && (
           <>
-            <div className="px-3 pt-4 pb-1 text-[10px] uppercase tracking-widest text-muted">Administration</div>
-            {ADMIN_NAV.map((item) => <Item key={item.href} item={item} pathname={pathname} />)}
+            <div className="px-3 pt-4 pb-1 text-[10px] uppercase tracking-widest text-muted">{t("chrome.administration")}</div>
+            {ADMIN_NAV.map((item) => <Item key={item.href} item={item} pathname={pathname} label={t(item.labelKey)} />)}
           </>
         )}
       </nav>
+
+      <div className="px-3 py-2 border-t border-border flex justify-center">
+        <LanguageToggle />
+      </div>
 
       <div className="p-3 border-t border-border flex items-center gap-3">
         <Link href="/app/profile" className="flex items-center gap-2.5 min-w-0 flex-1 hover:opacity-80">
@@ -62,7 +69,7 @@ export default function AppSidebar({ isAdmin, user }: { isAdmin: boolean; user: 
           </div>
         </Link>
         <form action={signOut}>
-          <button className="text-muted hover:text-foreground p-2 rounded-lg hover:bg-white/5" title="Sign out">
+          <button className="text-muted hover:text-foreground p-2 rounded-lg hover:bg-white/5" title={t("chrome.signOut")}>
             <LogOut size={18} />
           </button>
         </form>

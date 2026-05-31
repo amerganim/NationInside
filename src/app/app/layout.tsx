@@ -3,12 +3,15 @@ import { redirect } from "next/navigation";
 import { getSession, isAdmin } from "@/lib/auth/session";
 import AppSidebar, { type SidebarUser } from "@/components/app/AppSidebar";
 import AppMobileNav from "@/components/app/AppMobileNav";
+import { LocaleProvider } from "@/lib/i18n/client";
+import { getLocale } from "@/lib/i18n/server";
 
 export const dynamic = "force-dynamic";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const { userId, email, profile } = await getSession();
   if (!userId) redirect("/login");
+  const locale = await getLocale();
 
   const name = profile?.full_name || email || "Member";
   const user: SidebarUser = {
@@ -20,6 +23,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const admin = isAdmin(profile);
 
   return (
+    <LocaleProvider locale={locale}>
     <div className="flex">
       <AppSidebar isAdmin={admin} user={user} />
       <div className="flex-1 min-w-0">
@@ -38,5 +42,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <main className="px-4 md:px-8 py-6 max-w-[1200px] mx-auto">{children}</main>
       </div>
     </div>
+    </LocaleProvider>
   );
 }
