@@ -3,7 +3,7 @@ import { Users, UserCheck, Clock, CalendarDays, Target, Award, Trophy, Activity 
 import { getSession, isAdmin } from "@/lib/auth/session";
 import { getInsights } from "@/lib/insights/queries";
 import { KpiCard, Panel, Avatar, ScoreBar, scoreColor } from "@/components/ui";
-import { StatusDonut, DistrictsBar } from "@/components/app/InsightsCharts";
+import { StatusDonut, DistrictsBar, EngagementTrend, InsightsMap } from "@/components/app/InsightsCharts";
 import { rankFor } from "@/lib/gamification";
 
 export const dynamic = "force-dynamic";
@@ -33,6 +33,15 @@ export default async function InsightsPage() {
         <KpiCard label="Active" value={d.activeMembers} delta={`${d.pendingMembers} pending`} icon={<UserCheck size={18} />} accent="var(--accent-2)" />
         <KpiCard label="Events" value={d.eventsCount} delta={`${d.checkIns} check-ins`} icon={<CalendarDays size={18} />} accent="var(--warn)" />
         <KpiCard label="Points Awarded" value={d.totalPoints} delta={`${d.tasksApproved} tasks done`} icon={<Award size={18} />} accent="var(--bd-red)" />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <Panel className="lg:col-span-2" title="Engagement Trend" subtitle="Activity events & new members · last 30 days">
+          <EngagementTrend data={d.trend} />
+        </Panel>
+        <Panel title="District Coverage" subtitle="Members per committee · colour = health">
+          <InsightsMap points={d.mapPoints} />
+        </Panel>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">

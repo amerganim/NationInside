@@ -1,6 +1,6 @@
 import {
   Home, Bell, Target, CalendarDays, Megaphone, MessageSquareWarning, FileText,
-  BarChart3, ShieldCheck, type LucideIcon,
+  BarChart3, ShieldCheck, Search, type LucideIcon,
 } from "lucide-react";
 
 export interface NavItem {
@@ -21,6 +21,7 @@ export const MEMBER_NAV: NavItem[] = [
 
 export const ADMIN_NAV: NavItem[] = [
   { href: "/app/insights", label: "Leader Dashboard", icon: BarChart3 },
+  { href: "/app/search", label: "Smart Search", icon: Search },
   { href: "/app/admin", label: "Verify Members", icon: ShieldCheck },
 ];
 
