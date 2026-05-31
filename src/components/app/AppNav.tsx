@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Target, CalendarDays, Megaphone, ShieldCheck } from "lucide-react";
+import { Home, Target, CalendarDays, Megaphone, ShieldCheck, BarChart3 } from "lucide-react";
 
 const BASE = [
   { href: "/app", label: "Home", icon: Home },
@@ -11,9 +11,14 @@ const BASE = [
   { href: "/app/mobilize", label: "Mobilise", icon: Megaphone },
 ];
 
+const ADMIN = [
+  { href: "/app/insights", label: "Insights", icon: BarChart3 },
+  { href: "/app/admin", label: "Admin", icon: ShieldCheck },
+];
+
 export default function AppNav({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();
-  const items = isAdmin ? [...BASE, { href: "/app/admin", label: "Admin", icon: ShieldCheck }] : BASE;
+  const items = isAdmin ? [...BASE, ...ADMIN] : BASE;
   return (
     <nav className="flex gap-1 overflow-x-auto">
       {items.map((it) => {
